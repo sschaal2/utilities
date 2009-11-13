@@ -35,7 +35,7 @@ INSTALL_HEADERS = ../include/utility.h ../include/data_sets.h ../include/nrutil.
 AllTarget()
 
 HeaderTarget($(INSTALL_HEADERS))
-DocTarget($(LAB_ROOT)/doxygen/Doxyfile)
+DocTarget(../doc/Doxyfile)
 
 
 

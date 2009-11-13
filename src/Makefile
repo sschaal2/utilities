@@ -43,8 +43,8 @@ CLGLIBDIR       =   $(LAB_LIBDIR)
 
 VXPROCS         =   ../2700  ../2400
 
-MATLAB_SUFFIX   =  mexmac
-MATLAB_ARCH     =  mac
+MATLAB_SUFFIX   =  mexglx
+MATLAB_ARCH     =  glnx86
 
 MATLAB_ROOT     =   /usr/local/matlab
 MATLAB_INCLUDES =  -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include
@@ -91,7 +91,7 @@ XENOMAI_ROOT    = /usr/xenomai
 
     INSTDISTFLAGS = -m 0664
      INSTOBJFLAGS = -m 0755
-     INSTBINFLAGS = -c -m 0755
+     INSTBINFLAGS = -m 0755
      INSTLIBFLAGS = -m 0664
      INSTMANFLAGS = -m 0444
      INSTDATFLAGS = -m 0444
@@ -101,10 +101,12 @@ XENOMAI_ROOT    = /usr/xenomai
 
   NORMAL_CC_FLAGS = -D$(MACHTYPE) -D$(LAB) -DUNIX -Wall -Wno-unused -Wno-strict-aliasing -mcpu=$(MACHTYPE)
 
+  NORMAL_CC_FLAGS = -D$(MACHTYPE) -D$(LAB) -DUNIX -Wall -Wno-unused -Wno-strict-aliasing -mtune=native -msse3
+
     ANSI_CC_FLAGS = -ansi -pedantic -Wtrigraphs
    DEBUG_CC_FLAGS = -g
-OPTIMIZE_CC_FLAGS = -O3  -funit-at-a-time
-  MATLAB_CC_FLAGS = -DMATLAB_MEX_FILE -fno-common -traditional-cpp
+OPTIMIZE_CC_FLAGS = -O3  -ffast-math -funit-at-a-time
+  MATLAB_CC_FLAGS = -DMATLAB_MEX_FILE -fPIC -D_GNU_SOURCE -pthread
     LINT_CC_FLAGS = -Wall -Wimplicit -Wreturn-type -Wunused -Wswitch 			-Wcomment -Wshadow -Wid-clash-31 -Wpointer-arith 			-Wcast-qual
 
   C40_NORMAL_CC_FLAGS = -x -v40 -mf -c -Dc40 -eo.o
@@ -127,11 +129,11 @@ OPTIMIZE_CC_FLAGS = -O3  -funit-at-a-time
 
    LDCOMBINEFLAGS = -X -r
 
-      SYS_LDFLAGS = -L/opt/local/lib -L/sw/lib -L/usr/X11/lib $(SYS_LIBDIR)
+      SYS_LDFLAGS = -L/usr/X11/lib $(SYS_LIBDIR)
 
-      LAB_LDFLAGS = -bind_at_load -multiply_defined suppress $(LAB_LIBDIR)
-   MATLAB_LDFLAGS = -bundle -Wl,-flat_namespace -undefined suppress $(MATLAB_LIBDIR)
-    LAB_VXLDFLAGS = -bind_at_load -multiply_defined suppress $(LAB_VXLIBDIR)
+      LAB_LDFLAGS =  $(LAB_LIBDIR)
+   MATLAB_LDFLAGS = -pthread -shared -Wl,--version-script,$(MATLAB_ROOT)/extern/lib/glnx86/mexFunction.map $(MATLAB_LIBDIR)
+    LAB_VXLDFLAGS =  $(LAB_VXLIBDIR)
      PROJ_LDFLAGS =  $(PROJ_LIBDIR)
      PROJ_VXLDFLAGS =  $(PROJ_VXLIBDIR)
 
@@ -143,13 +145,13 @@ DIRECTORY_DEFINES =
     PROJ_IMAKEDIR = $(LAB_ROOT)/imake
      LAB_IMAKEDIR = $(LAB_ROOT)/imake
 
-    SYS_LIBRARIES = -lpthread -lreadline -lcurses
+    SYS_LIBRARIES = $(shell $(XENOMAI_ROOT)/bin/xeno-config --posix-ldflags) -lnative -lrtdk -lreadline -lcurses
     LAB_LIBRARIES =
    PROJ_LIBRARIES =
- OPENGL_LIBRARIES = -L/opt/local/lib -L/sw/lib -lglut -lGL -lGLU -Wl,-dylib_file,/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib:/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+ OPENGL_LIBRARIES = -lglut -lGL -lGLU -lX11 -lXmu
  MATLAB_LIBRARIES = -L$(MATLAB_ROOT)/bin/$(MATLAB_ARCH) -lmx -lmex -lmat -lm
-     SYS_INCLUDES = -I/sw/include -I/opt/local/include -I/usr/include -I/usr/X11/include
-   COMM_LIBRARIES =
+     SYS_INCLUDES = $(shell $(XENOMAI_ROOT)/bin/xeno-config --posix-cflags)
+   COMM_LIBRARIES = -lnsl
 
       ALLINCLUDES = $(INCLUDES) $(PROJ_INCLUDES) $(LAB_INCLUDES) $(SYS_INCLUDES)
        ALLDEFINES = $(DEFINES) $(DIRECTORY_DEFINES) $(PROJ_DEFINES) 			$(LAB_DEFINES) $(ALLINCLUDES)
