@@ -30,7 +30,7 @@ SUBDIRS                = ../$(MACHTYPE)
 endif
 
 
-INSTALL_HEADERS = ../include/utility.h ../include/data_sets.h ../include/nrutil.h ../include/statistics.h ../include/utility_macros.h
+INSTALL_HEADERS = ../include/utility.h ../include/data_sets.h ../include/nrutil.h ../include/statistics.h ../include/utility_macros.h ../include/mdefs.h
 
 AllTarget()
 
