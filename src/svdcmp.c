@@ -1,6 +1,8 @@
 #include <math.h>
+#include <float.h>
 #define NRANSI
 #include "nrutil.h"
+
 
 void my_svdcmp(double **a, int m, int n, double w[], double **v)
 {
@@ -8,6 +10,8 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
   int flag,i,its,j,jj,k,l=0,nm=0;
   double anorm,c,f,g,h,s,scale,x,y,z,*rv1;
 
+  //added to fix pb of convergence with modern pentiums
+  double eps = DBL_EPSILON;
 
   rv1=my_vector(1,n);
   g=scale=anorm=0.0;
@@ -93,11 +97,11 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
       flag=1;
       for (l=k;l>=1;l--) {
 	nm=l-1;
-	if ((double)(fabs(rv1[l])+anorm) == anorm) {
+	if ((double)(fabs(rv1[l])) <= anorm*eps) {
 	  flag=0;
 	  break;
 	}
-	if ((double)(fabs(w[nm])+anorm) == anorm) break;
+	if ((double)(fabs(w[nm])) <= anorm*eps) break;
       }
       if (flag) {
 	c=0.0;
@@ -105,7 +109,7 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
 	for (i=l;i<=k;i++) {
 	  f=s*rv1[i];
 	  rv1[i]=c*rv1[i];
-	  if ((double)(fabs(f)+anorm) == anorm) break;
+	  if ((double)(fabs(f)) <= anorm*eps) break;
 	  g=w[i];
 	  h=my_pythag(f,g);
 	  w[i]=h;
