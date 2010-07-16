@@ -6675,10 +6675,11 @@ read_a_long(int silent, FILE *fd, char *string, long  *pint )
  \remarks 
  
  opens a file with a given file name for read/write, but strips
- away all C-convention comments in this file. The pointer 
- returned will point to a temp.temp file afterwards which
- can be inspected or removed afterwards. The orginal file
- remains unchanged
+ away all C/C++ convention comments in this file. The pointer 
+ returned will point to a temp file afterwards which will be automatically
+ removed afterwards. The orginal file  remains unchanged.
+
+ Note: we also strip ';' '=' ':' for easier parsing
  
  *******************************************************************************
  Function Parameters: [in]=input,[out]=output
@@ -6702,19 +6703,14 @@ fopen_strip(char *filename)
   int   skip = C_NONE;
   int   wait = 2;
   int   dummy;
-  int   fd;
-
 
   infile = fopen(filename,"r");
   if (infile == NULL)
     return NULL;
   
-  /* clean away any comment lines as well as commas and semicolons */
-  /*sprintf(tempfile,"%s%ld",TEMPFILE,random_number(0,100000));*/
-  sprintf(tempfile,"%sXXXXXXXX",TEMPFILE);
-  if ((fd = mkstemp(tempfile))==-1 ||
-      (temp = fdopen(fd,"w+"))==NULL) {
-    strcpy(tempfile,"");
+  // clean away any comment lines as well as commas, semicolons, and equal signs
+  if ((temp = tmpfile())==NULL) {
+    fclose(infile);
     return NULL;
   }
   last_rc = EOF;
