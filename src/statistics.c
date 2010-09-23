@@ -64,9 +64,8 @@ filtfilt( double *vec, int nr, int cutoff, double *vec_out)
   int i,j,n;
   double *temp;
   double aux;
-  char   fname[100];
+  char   fname[strlen(getenv("LAB_ROOT"))+100];
   int rc;
-  
 
   if (cutoff == 0) { /* this takes the mean of all values */
     aux = 0;
