@@ -16,7 +16,15 @@
 #define BYTESWAP
 #endif
 
+#ifdef i386mac
+#define BYTESWAP
+#endif
+
 #ifdef i486
+#define BYTESWAP
+#endif
+
+#ifdef i486xeno
 #define BYTESWAP
 #endif
 
@@ -29,6 +37,10 @@
 #endif
 
 #ifdef x86_64mac
+#define BYTESWAP
+#endif
+
+#ifdef x86_64xeno
 #define BYTESWAP
 #endif
 
