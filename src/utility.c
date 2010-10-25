@@ -4176,12 +4176,112 @@ vec_mat_mult(Vector a, Matrix b, Vector c)
   bc = b[0][NC];
   
   if (ar != br) {
-    printf("Matrix and vector are incompatible in mat_vec_mult.\n");
+    printf("Matrix and vector are incompatible in vec_mat_mult.\n");
     return FALSE;
   }
 
   if (c[NR] != bc) {
-    printf("Output vector is incompatible in mat_vec_mult.\n");
+    printf("Output vector is incompatible in vec_mat_mult.\n");
+    return FALSE;
+  }
+
+  if (a == c) {
+    temp = my_vector(1,bc);
+  } else {
+    temp = c;
+  }
+
+  switch ((int)b[0][MAT_TYPE]) {
+
+  case IS_FULL:
+  
+    for (i=1; i <= bc; ++i) {
+      temp[i]=0;
+      for (j=1; j <= br; ++j){
+	temp[i] += a[j] * b[j][i];
+      }
+    }
+    
+    break;
+
+
+  case IS_DIAG:
+
+    for (i=1; i <= bc; ++i) {
+      temp[i] = a[i] * b[i][i];
+    }
+    
+    break;
+
+
+  case IS_SYMM:
+
+    for (i=1; i <= bc; ++i) {
+      temp[i]=0;
+      for (j=i; j <= br; ++j){
+	temp[i] += a[j] * b[i][j];
+	if (i!=j)
+	  temp[j] += a[i] * b[i][j];
+      }
+    }
+
+    break;
+
+
+  default:
+
+    exit(-17);
+
+  }
+
+
+  if (a == c) {
+    vec_equal(temp,c);
+    my_free_vector(temp,1,bc);
+  }
+
+  return TRUE;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
+\note  vec_mat_mult_size
+\date  August 17, 92
+
+\remarks 
+
+multiplies a vector with a matrix: a * b, assuming indices
+start at "1".
+Note: The program can also cope with passing the same vector as
+factor and result.
+
+ *******************************************************************************
+Parameters:  (i/o = input/output)
+
+ \param[in]     a		 : vector a
+ \param[in]     ar               : number of cofficients in A
+ \param[in]     b		 : matrix b
+ \param[in]     br               : number of rows in b
+ \param[in]     bc               : number of columns in b
+ \param[out]    c		 : result of multipliciation
+
+ ******************************************************************************/
+int
+vec_mat_mult_size(double * a, int ar,  double ** b, int br, int bc, double *c)
+
+{
+
+  int     i,j,m;
+  Vector  temp;
+
+  if (ar != br) {
+    printf("Matrix and vector are incompatible in vec_mat_mult.\n");
+    return FALSE;
+  }
+
+  if (c[NR] != bc) {
+    printf("Output vector is incompatible in vec_mat_mult.\n");
     return FALSE;
   }
 

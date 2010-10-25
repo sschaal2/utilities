@@ -1,8 +1,8 @@
 /*!<  CGA #define TOL 2.0e-4  This is too small? */
 #define TOL 2.0e-4
 
-static int ncom=0;	/* defining declarations */
-static double *pcom=0,*xicom=0,(*nrfunc)();
+int ncom=0;	/* defining declarations */
+double *pcom=0,*xicom=0,(*nrfunc)();
 void (*nrdfun)();
 
 void my_dlinmin(p,xi,n,fret,func,dfunc)

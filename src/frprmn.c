@@ -5,10 +5,10 @@
 #define EPS 1.0e-10
 #define FREEALL my_free_vector(xi,1,n);my_free_vector(h,1,n);my_free_vector(g,1,n);
 
-void my_frprmn(p,n,ftol,iter,fret,func,dfunc)
-double p[],ftol,*fret,(*func)();
-void (*dfunc)();
-int n,*iter;
+void 
+my_frprmn(double *p,int n, double ftol, int *iter, double *fret, 
+	  double (*func)(double *), void (*dfunc)(double *, double *))
+
 {
 	int j,its;
 	double gg,gam,fp,dgg;
