@@ -1,7 +1,6 @@
 #include "math.h"
 #include "stdio.h"
 
-#define ITMAX 1000
 #define EPS 1.0e-10
 #define FREEALL my_free_vector(xi,1,n);my_free_vector(h,1,n);my_free_vector(g,1,n);
 
@@ -14,6 +13,9 @@ my_frprmn(double *p,int n, double ftol, int *iter, double *fret,
   double gg,gam,fp,dgg;
   double *g,*h,*xi,*my_vector();
   void my_dlinmin(),my_nrerror(),my_free_vector();
+  int ITMAX;
+
+  ITMAX = *iter;
 
   g=my_vector(1,n);
   h=my_vector(1,n);
@@ -50,7 +52,9 @@ my_frprmn(double *p,int n, double ftol, int *iter, double *fret,
       xi[j]=h[j]=g[j]+gam*h[j];
     }
   }
-  my_nrerror("Too many iterations in FRPRMN");
+  /* my_nrerror("Too many iterations in FRPRMN"); */
+  FREEALL
+    
 }
 
 #undef ITMAX

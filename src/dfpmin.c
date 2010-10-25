@@ -3,7 +3,6 @@
 #include "stdio.h"
 #include "math.h"
 
-#define ITMAX 1000
 #define EPS 1.0e-10
 
 void 
@@ -16,6 +15,9 @@ my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
   double *xi,*g,*dg,*hdg,*my_vector();
   double **hessin,**my_matrix();
   void my_dlinmin(),my_nrerror(),my_free_matrix(),my_free_vector();
+  int ITMAX;
+
+  ITMAX = *iter;
 
   hessin=my_matrix(1,n,1,n);
   xi=my_vector(1,n);
@@ -67,7 +69,13 @@ my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
       for (j=1;j<=n;j++) xi[i] -= hessin[i][j]*g[j];
     }
   }
-  my_nrerror("Too many iterations in DFPMIN");
+  /* my_nrerror("Too many iterations in DFPMIN"); */
+  my_free_vector(hdg,1,n);
+  my_free_vector(dg,1,n);
+  my_free_vector(g,1,n);
+  my_free_vector(xi,1,n);
+  my_free_matrix(hessin,1,n,1,n);
+  
 }
 
 #undef ITMAX
