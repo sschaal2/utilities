@@ -1,5 +1,6 @@
 /*!<  CGA #define TOL 2.0e-4  This is too small? */
-#define TOL 2.0e-4
+// #define TOL 2.0e-4
+#define TOL 1.0e-6
 
 int ncom=0;	/* defining declarations */
 double *pcom=0,*xicom=0,(*nrfunc)();

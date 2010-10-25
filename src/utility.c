@@ -3418,6 +3418,80 @@ mat_mahal_matrix(Matrix a, Matrix b, Matrix c){
 
 /*!*****************************************************************************
  *******************************************************************************
+ \note  mat_mahal_size
+ \date  August 17, 92
+ 
+ \remarks 
+ 
+ calculates b'a b, i.e., the mahalanobis distance
+
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     a		 : matrix a
+ \param[in]     nr		 : number of rows in a and b 
+ \param[in]     b		 : vector b
+ 
+ ******************************************************************************/
+double   
+mat_mahal_size(Matrix a, int nr, Vector b)
+{
+  int    i,j;
+  double mahal=0.0;
+
+  if (a[0][NR]!=b[NR] || a[0][NC]!=b[NR]) {
+    printf("Incompatible matrix vector combination in mat_mahal\n");
+    return 0.0;
+  }
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_SYMM:
+
+    for (i=1; i<=nr; ++i) {
+      for (j=i; j<=nr; ++j) {
+	if (i == j) {
+	  mahal += a[i][j]*b[i]*b[j];
+	} else {
+	  mahal += 2.*a[i][j]*b[i]*b[j];
+	}
+      }
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    for (i=1; i<=nr; ++i) {
+      mahal += a[i][i]*b[i]*b[i];
+    }
+
+    break;
+
+
+  case IS_FULL:
+
+    for (i=1; i<=nr; ++i) {
+      for (j=1; j<=nr; ++j) {
+	mahal += a[i][j]*b[i]*b[j];
+      }
+    }
+
+    break;
+
+
+  default:
+
+    exit(-15);
+
+  }
+
+  return (mahal);
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
  \note  mat_mahal
  \date  August 17, 92
  
@@ -4277,11 +4351,6 @@ vec_mat_mult_size(double * a, int ar,  double ** b, int br, int bc, double *c)
 
   if (ar != br) {
     printf("Matrix and vector are incompatible in vec_mat_mult.\n");
-    return FALSE;
-  }
-
-  if (c[NR] != bc) {
-    printf("Output vector is incompatible in vec_mat_mult.\n");
     return FALSE;
   }
 

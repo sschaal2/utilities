@@ -377,6 +377,8 @@ extern "C" {
 
   /* mahalanobis distance, assuming a positive definite matrix */
   double   mat_mahal(Matrix a, Vector b);
+  double   mat_mahal_size(Matrix a, int nr, Vector b);
+
 
   /* mahalanobis distance, assuming nothing */
   double   mat_mahal_irr(Vector c, Matrix a, Vector b);
@@ -511,6 +513,9 @@ extern "C" {
   void my_frprmn(double *p,int n, double ftol, int *iter, double *fret, 
 		 double (*func)(double *), void (*dfunc)(double *, double *));
 
+  void 
+  my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
+	    double (*func)(double *),void (*dfunc)(double *,double *));
 
   /* matrix inversion functions */
   int my_inv_ludcmp(Matrix mat, int size, Matrix inv_mat);
