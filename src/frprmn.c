@@ -27,7 +27,7 @@ my_frprmn(double *p,int n, double ftol, int *iter, double *fret,
     xi[j]=h[j]=g[j];
   }
   for (its=1; its<=ITMAX;its++) {
-    printf("---- %d %f ----\n",its,fp);
+    if (its%((int)(ITMAX/100)) == 1) printf("---- %d %f ----\n",its,fp);
     *iter=its;
     my_dlinmin(p,xi,n,fret,func,dfunc);
     if (2.0*fabs(*fret-fp) <= ftol*(fabs(*fret)+fabs(fp)+EPS)) {
@@ -44,6 +44,7 @@ my_frprmn(double *p,int n, double ftol, int *iter, double *fret,
     }
     if (gg == 0.0) {
       FREEALL
+	printf("---- %d %f ----\n",its,fp);
 	return;
     }
     gam=dgg/gg;
@@ -54,6 +55,7 @@ my_frprmn(double *p,int n, double ftol, int *iter, double *fret,
   }
   /* my_nrerror("Too many iterations in FRPRMN"); */
   FREEALL
+    printf("---- %d %f ----\n",its,fp);
     
 }
 

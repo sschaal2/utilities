@@ -32,7 +32,7 @@ my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
     xi[i] = -g[i];
   }
   for (its=1; its<=ITMAX;its++) {
-    printf("---- %d %f ----\n",its,fp);
+    if (its%((int)(ITMAX/100)) == 1) printf("---- %d %f ----\n",its,fp);
     *iter=its;
     my_dlinmin(p,xi,n,fret,func,dfunc);
     if (2.0*fabs(*fret-fp) <= ftol*(fabs(*fret)+fabs(fp)+EPS)) {
@@ -41,6 +41,7 @@ my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
       my_free_vector(g,1,n);
       my_free_vector(xi,1,n);
       my_free_matrix(hessin,1,n,1,n);
+      printf("---- %d %f ----\n",its,fp);
       return;
     }
     fp=(*fret);
@@ -75,7 +76,7 @@ my_dfpmin(double *p,int n, double ftol,int *iter,double *fret,
   my_free_vector(g,1,n);
   my_free_vector(xi,1,n);
   my_free_matrix(hessin,1,n,1,n);
-  
+  printf("---- %d %f ----\n",its,fp);
 }
 
 #undef ITMAX
