@@ -55,6 +55,8 @@ static int track_calloc = FALSE;
 static int max_track_calloc = 0;
 static void **track_list = NULL;
 static unsigned long n_track_calloc=0;
+static void fopen_strip_recursive(char *filename, FILE *temp);
+
 
 
 /*!*****************************************************************************
@@ -6843,22 +6845,59 @@ read_a_long(int silent, FILE *fd, char *string, long  *pint )
  
  \remarks 
  
- opens a file with a given file name for read/write, but strips
- away all C/C++ convention comments in this file. The pointer 
- returned will point to a temp file afterwards which will be automatically
- removed afterwards. The orginal file  remains unchanged.
+ opens a file with a given file name for read/write, but strips away
+ all C/C++ convention comments in this file. The pointer returned will
+ point to a temp file afterwards which will be automatically removed
+ afterwards. The orginal file remains unchanged.
 
- Note: we also strip ';' '=' ':' for easier parsing
+ Note: - we also strip ';' '=' ':' for easier parsing
+       - #include "filename" is permitted to include other files
+       - the # sign is a reserved character
  
  *******************************************************************************
  Function Parameters: [in]=input,[out]=output
  
- none
+ \param[in]   filename : name of file to be read
  
  ******************************************************************************/
 FILE *
 fopen_strip(char *filename)
      
+{
+  FILE *temp;
+
+  // open a temp file 
+  if ((temp = tmpfile())==NULL)
+    return NULL;
+
+  // read the files and included files recursively
+  fopen_strip_recursive(filename,temp);
+ 
+  // reset the tempfile to the beginning
+  rewind(temp);
+
+  return temp;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
+ \note  fopen_strip_recursive
+ \date  March 94
+ 
+ \remarks 
+ 
+ recursive program to read all files and included files for fopen_strip
+ 
+ *******************************************************************************
+ Function Parameters: [in]=input,[out]=output
+ 
+ \param[in]   filename : name of file to be read
+ \param[in]   temp     : file pointer for output file
+ 
+ ******************************************************************************/
+static void
+fopen_strip_recursive(char *filename, FILE *temp)
 {
 
   enum Comments {
@@ -6867,24 +6906,24 @@ fopen_strip(char *filename)
     C_PLUS
   };
 
-  FILE *infile, *temp;
+  FILE *infile;
   int	i,k,rc,last_rc;
   int   skip = C_NONE;
   int   wait = 2;
   int   dummy;
+  char  keyword[100];
+  char  fname[100];
+  char  dum;
 
   infile = fopen(filename,"r");
-  if (infile == NULL)
-    return NULL;
-  
-  // clean away any comment lines as well as commas, semicolons, and equal signs
-  if ((temp = tmpfile())==NULL) {
-    fclose(infile);
-    return NULL;
+  if (infile == NULL) {
+    printf("Error: fopen_strip couldn't read file >%s<",filename);
+    return;
   }
+  
+
+  // clean away comments and add new include files
   last_rc = EOF;
-  
-  
   while ((rc=fgetc(infile)) != EOF) {
     
     --wait;
@@ -6900,6 +6939,16 @@ fopen_strip(char *filename)
       skip = C_NONE;
       wait = 2;
     }
+
+    // check for # signs
+    if ( rc == '#') {
+      fscanf(infile,"%s %[\"]%s",keyword,&dum,fname);
+      if (strcmp(keyword,"include")==0) {
+	fname[strlen(fname)-1]='\0';
+	fopen_strip_recursive(fname,temp);
+      }
+      continue;
+    }
     
     if (skip == C_NONE && last_rc != EOF && wait <= 0) {
       if (last_rc != ';' && last_rc != ',' && last_rc != '=') {
@@ -6913,9 +6962,6 @@ fopen_strip(char *filename)
   
   fputc(last_rc,temp);
   fclose(infile);
-  rewind(temp);
-
-  return temp;
 
 }
 
