@@ -6940,7 +6940,7 @@ fopen_strip_recursive(char *filename, FILE *temp)
     }
 
     // check for # signs
-    if ( rc == '#') {
+    if ( rc == '#' && skip == C_NONE && wait <= 0) {
       fscanf(infile,"%s",keyword);
       if (strcmp(keyword,"include")==0) {
 	// find the string between double quotes
