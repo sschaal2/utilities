@@ -6907,13 +6907,12 @@ fopen_strip_recursive(char *filename, FILE *temp)
   };
 
   FILE *infile;
-  int	i,k,rc,last_rc;
+  int	i,k,rc,last_rc,j;
   int   skip = C_NONE;
   int   wait = 2;
   int   dummy;
   char  keyword[100];
-  char  fname[100];
-  char  dum;
+  char  fname[100+1];
 
   infile = fopen(filename,"r");
   if (infile == NULL) {
@@ -6942,9 +6941,26 @@ fopen_strip_recursive(char *filename, FILE *temp)
 
     // check for # signs
     if ( rc == '#') {
-      fscanf(infile,"%s %[\"]%s",keyword,&dum,fname);
+      fscanf(infile,"%s",keyword);
       if (strcmp(keyword,"include")==0) {
-	fname[strlen(fname)-1]='\0';
+	// find the string between double quotes
+	while ((rc=fgetc(infile)) != '"') { // find the first double quote
+	  if (rc == EOF) {
+	    printf("Error: fopen_strip: could not parse include file name (first \")\n");
+	    return;
+	  }
+	}
+	j=0;
+	while ((rc=fgetc(infile)) != '"') { // read until the next double quote
+	  if (rc == EOF) {
+	    printf("Error: fopen_strip: could not parse include file name (second \")\n");
+	    return;
+	  }
+	  if (j<100)
+	    fname[j++] = rc;
+	}
+	fname[j]='\0';
+
 	fopen_strip_recursive(fname,temp);
       }
       continue;
