@@ -9,6 +9,7 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
   double my_pythag(double a, double b);
   int flag,i,its,j,jj,k,l=0,nm=0;
   double anorm,c,f,g,h,s,scale,x,y,z,*rv1;
+  double aux;
 
   //added to fix pb of convergence with modern pentiums
   double eps = DBL_EPSILON;
@@ -184,6 +185,25 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
     }
   }
   my_free_vector(rv1,1,n);
+
+  // sort the columns of u and v accoring to w coefficients
+  for (j=1; j<=n; ++j)
+    for (i=1; i<=n-j; ++i)
+      if (w[i] < w[i+1]) {
+	for (jj=1; jj<=n; ++jj) {
+	  aux = v[jj][i];
+	  v[jj][i] = v[jj][i+1];
+	  v[jj][i+1] = aux;
+	}
+	for (jj=1; jj<=m; ++jj) {
+	  aux = a[jj][i];
+	  a[jj][i] = a[jj][i+1];
+	  a[jj][i+1] = aux;
+	}
+	aux = w[i];
+	w[i]=w[i+1];
+	w[i+1]=aux;
+      }
 
 }
 #undef NRANSI
