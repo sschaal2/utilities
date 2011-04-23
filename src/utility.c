@@ -2734,6 +2734,68 @@ mat_fzero(fMatrix a)
 
 /*!*****************************************************************************
  *******************************************************************************
+ \note  mat_izero
+ \date  August 17, 92
+ 
+ \remarks 
+ 
+ zeros a matrix
+ 
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     a		 : vector a
+ 
+ ******************************************************************************/
+void     
+mat_izero(iMatrix a)
+     
+{
+  int i,j;
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_FULL:
+
+    for (i=1; i<=a[0][NR]; ++i) {
+      for (j=1; j<=a[0][NC]; ++j) {
+	a[i][j] = 0.0;
+      }
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    for (i=1; i<=a[0][NR]; ++i) {
+      a[i][i] = 0.0;
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    for (i=1; i<=a[0][NR]; ++i) {
+      for (j=i; j<=a[0][NC]; ++j) {
+	a[i][j] = 0.0;
+      }
+    }
+
+    break;
+
+
+  default:
+    
+    exit(-14);
+
+  }
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
  \note  mat_eye
  \date  August 17, 92
  
@@ -4220,6 +4282,77 @@ fmat_equal_apply_math(fMatrix a, float (*func)(float), fMatrix c)
 
 /*!*****************************************************************************
  *******************************************************************************
+\note  imat_equal_apply_math
+\date  August 17, 92
+
+\remarks 
+
+ applies a given (double) function to each element of the matrix
+
+ *******************************************************************************
+Parameters:  (i/o = input/output)
+
+ \param[in]     a		   : matrix a
+ \param[in]     func               : (int) function pointer to be applied
+ \param[out]    c                  : output matrix
+
+ ******************************************************************************/
+int
+imat_equal_apply_math(iMatrix a, int (*func)(int), iMatrix c)
+
+{
+
+  int aux = 0;
+  int i,j;
+
+  if (a[0][NR]!=c[0][NR] || a[0][NC]!=c[0][NC] || 
+      c[0][MAT_TYPE] > a[0][MAT_TYPE]) {
+    printf("Incompatible matrices in mat_mult_scalar\n");
+    return FALSE;
+  }
+
+  if (a!=c)
+    imat_equal(a,c);
+
+  switch ((int)c[0][MAT_TYPE]) {
+    
+  case IS_FULL:
+
+    for (i=1; i<=c[0][NR]; ++i) {
+      for (j=1; j<=c[0][NC]; ++j) {
+	c[i][j] = (*func)(c[i][j]);
+      }
+    }
+
+    break;
+
+  case IS_DIAG:
+
+    for (i=1; i<=c[0][NR]; ++i) {
+      c[i][i] = (*func)(c[i][i]);
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    for (i=1; i<=c[0][NR]; ++i) {
+      for (j=i; j<=c[0][NC]; ++j) {
+	c[i][j] = (*func)(c[i][j]);
+      }
+    }
+
+    break;
+
+  }
+
+  return TRUE;
+  
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
 \note  vec_mat_mult
 \date  August 17, 92
 
@@ -5233,6 +5366,92 @@ fmat_equal(fMatrix a, fMatrix c)
 
   if (c[0][MAT_TYPE] < a[0][MAT_TYPE]) {
     fmat_zero(c);
+  }
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_FULL:
+
+    for (i=1; i <= a[0][NR]; ++i) {
+      for (j=1; j <= a[0][NC]; ++j){
+	c[i][j] = a[i][j];
+      }
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    for (i=1; i <= a[0][NR]; ++i) {
+      for (j=i; j <= a[0][NC]; ++j){
+	c[i][j] = a[i][j];
+	if (c[0][MAT_TYPE]==IS_FULL && i!=j)
+	  c[j][i] = a[i][j];
+      }
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    for (i=1; i <= a[0][NR]; ++i) {
+      c[i][i] = a[i][i];
+    }
+
+    break;
+
+
+  default:
+
+    exit(-19);
+
+  }
+
+  return TRUE;
+
+}
+
+
+/*!*****************************************************************************
+ *******************************************************************************
+ \note  imat_equal
+ \date  August 17, 92
+ 
+ \remarks 
+ 
+ set matrix c = a
+ matrix indices start at "1".
+ Note: if a vector is passed, it must be the pointer to the vector;
+ everything is handled as a matrix!
+ 
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     a		 : matrix a
+ \param[out]    c		 : result of addition
+ 
+ ******************************************************************************/
+int
+imat_equal(iMatrix a, iMatrix c)
+
+{
+  int i,j;
+
+  if (a[0][NR] != c[0][NR] || a[0][NC] !=c[0][NC]) {
+    printf("Incompatible matrices in mat_equal\n");
+    return FALSE;
+  }
+
+  if (c[0][MAT_TYPE] > a[0][MAT_TYPE]) {
+    printf("Incompatible matrix types in mat_equal\n");
+    return FALSE;
+  }
+
+
+  if (c[0][MAT_TYPE] < a[0][MAT_TYPE]) {
+    mat_izero(c);
   }
 
   switch ((int)a[0][MAT_TYPE]) {
@@ -7673,6 +7892,100 @@ fwrite_fmat(FILE *fp, fMatrix a)
 
 /*!*****************************************************************************
  *******************************************************************************
+ \note  fwrite_imat
+ \date  April 2011
+ 
+ \remarks 
+ 
+ writes the given integer matrix as binary to given file pointer
+ 
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     fp    : an (open) file pointer
+ \param[in]     a     : the matrix to be written
+ 
+ ******************************************************************************/
+int
+fwrite_imat(FILE *fp, iMatrix a)
+
+{
+
+  int i,j;
+  int nr,nc;
+  int num;
+
+  nr = a[0][NR];
+  nc = a[0][NC];
+
+#ifdef BYTESWAP
+  for (i=0;i<N_MAT_INFO;++i)
+    a[0][i]=byteswap_int(a[0][i]);
+#endif
+
+  num = N_MAT_INFO;
+  if (fwrite(&(a[0][0]),sizeof(int),num,fp)!= num) {
+    printf( "cannot fwrite matrix.\n" );
+    return FALSE;
+  }
+  
+#ifdef BYTESWAP
+  for (i=0;i<N_MAT_INFO;++i)
+    a[0][i]=byteswap_int(a[0][i]);
+  imat_equal_apply_math(a,byteswap_int,a);
+#endif
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_FULL:
+
+    num = a[0][NR]*a[0][NC];
+    if (fwrite(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fwrite matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    num = a[0][NR];
+    if (fwrite(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fwrite matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    num = a[0][NR]*(a[0][NR] + 1)/2;
+    if (fwrite(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fwrite matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  default:
+
+    exit(-22);
+
+  }
+
+#ifdef BYTESWAP
+  imat_equal_apply_math(a,byteswap_int,a);
+#endif
+
+  return TRUE;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
  \note  fread_mat
  \date  August 17, 92
  
@@ -7753,6 +8066,183 @@ fread_mat(FILE *fp, Matrix a)
 
 #ifdef BYTESWAP
   mat_equal_apply_math(a,byteswap_double,a);
+#endif
+
+  return TRUE;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
+ \note  fread_fmat
+ \date  August 17, 92
+ 
+ \remarks 
+ 
+ reads the given matrix as binary to given file pointer
+ 
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     a     : the matrix to be read
+ \param[in]     fp    : an (open) file pointer
+ 
+ ******************************************************************************/
+int
+fread_fmat(FILE *fp, fMatrix a)
+     
+{
+
+  int i,j;
+  int nr,nc;
+  int num;
+
+  nr = a[0][NR];
+  nc = a[0][NC];
+
+  num = N_MAT_INFO;
+  if (fread(&(a[0][0]),sizeof(float),num,fp)!= num) {
+    printf( "cannot fread matrix.\n" );
+    return FALSE;
+  }
+  
+#ifdef BYTESWAP
+  for (i=0;i<N_MAT_INFO;++i)
+    a[0][i]=byteswap_float(a[0][i]);
+#endif
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_FULL:
+
+    num = a[0][NR]*a[0][NC];
+    if (fread(&(a[1][1]),sizeof(float),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    num = a[0][NR];
+    if (fread(&(a[1][1]),sizeof(float),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    num = a[0][NR]*(a[0][NR] + 1)/2;
+    if (fread(&(a[1][1]),sizeof(float),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  default:
+
+    return FALSE;
+
+  }
+
+#ifdef BYTESWAP
+  fmat_equal_apply_math(a,byteswap_float,a);
+#endif
+
+  return TRUE;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
+ \note  fread_imat
+ \date  August 17, 92
+ 
+ \remarks 
+ 
+ reads the given matrix as binary to given file pointer
+ 
+ *******************************************************************************
+ Parameters:  (i/o = input/output)
+ 
+ \param[in]     a     : the matrix to be read
+ \param[in]     fp    : an (open) file pointer
+ 
+ ******************************************************************************/
+int
+fread_imat(FILE *fp, iMatrix a)
+     
+{
+
+  int i,j;
+  int nr,nc;
+  int num;
+
+  nr = a[0][NR];
+  nc = a[0][NC];
+
+  num = N_MAT_INFO;
+
+  if (fread(&(a[0][0]),sizeof(int),num,fp)!= num) {
+    printf( "cannot fread matrix.\n" );
+    return FALSE;
+  }
+  
+#ifdef BYTESWAP
+  for (i=0;i<N_MAT_INFO;++i)
+    a[0][i]=byteswap_int(a[0][i]);
+#endif
+
+  switch ((int)a[0][MAT_TYPE]) {
+
+  case IS_FULL:
+
+    num = a[0][NR]*a[0][NC];
+    if (fread(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_DIAG:
+
+    num = a[0][NR];
+    if (fread(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  case IS_SYMM:
+
+    num = a[0][NR]*(a[0][NR] + 1)/2;
+    if (fread(&(a[1][1]),sizeof(int),num,fp)!= num) {
+      printf( "cannot fread matrix.\n" );
+      return FALSE;
+    }
+
+    break;
+
+
+  default:
+
+    return FALSE;
+
+  }
+
+#ifdef BYTESWAP
+  imat_equal_apply_math(a,byteswap_int,a);
 #endif
 
   return TRUE;
