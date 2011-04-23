@@ -6941,7 +6941,7 @@ fopen_strip_recursive(char *filename, FILE *temp)
 
     // check for # signs
     if ( rc == '#' && skip == C_NONE && wait <= 0) {
-      fscanf(infile,"%s",keyword);
+      k=fscanf(infile,"%s",keyword);
       if (strcmp(keyword,"include")==0) {
 	// find the string between double quotes
 	while ((rc=fgetc(infile)) != '"') { // find the first double quote
