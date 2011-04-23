@@ -374,6 +374,7 @@ extern "C" {
   /* applies the given function to each matrix element and assign it to c */
   int      mat_equal_apply_math(Matrix a, double (*func)(double), Matrix c);
   int      fmat_equal_apply_math(fMatrix a, float (*func)(float), fMatrix c);
+  int      imat_equal_apply_math(iMatrix a, int (*func)(int), iMatrix c);
 
   /* mahalanobis distance, assuming a positive definite matrix */
   double   mat_mahal(Matrix a, Vector b);
@@ -391,6 +392,7 @@ extern "C" {
   /* zeros a matrix */
   void     mat_zero(Matrix a);
   void     mat_fzero(fMatrix a);
+  void     mat_izero(iMatrix a);
   void     mat_zero_size(Matrix a,int nr, int nc);
   /* makes a matrix the identity matrix */
   void     mat_eye(Matrix a);
@@ -405,6 +407,7 @@ extern "C" {
   /* sets matrix  c=a */
   int      mat_equal(Matrix a, Matrix c);       
   int      fmat_equal(fMatrix a, fMatrix c);       
+  int      imat_equal(iMatrix a, iMatrix c);       
   int      mat_equal_size(Matrix a, int nr, int nc, Matrix c);
   /* sets a vector equal another vector: c = a */
   int      vec_equal(Vector a, Vector c);
@@ -454,8 +457,11 @@ extern "C" {
   /* binary read and write */
 
   int      fread_mat(FILE *fp, Matrix a);
+  int      fread_fmat(FILE *fp, fMatrix a);
+  int      fread_imat(FILE *fp, iMatrix a);
   int      fwrite_mat(FILE *fp, Matrix a);
   int      fwrite_fmat(FILE *fp, fMatrix a);
+  int      fwrite_imat(FILE *fp, iMatrix a);
   int      fread_vec(FILE *fp, Vector a);
   int      fwrite_vec(FILE *fp, Vector a);
   int      fread_ivec(FILE *fp, iVector a);
