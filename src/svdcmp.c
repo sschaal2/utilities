@@ -2,19 +2,19 @@
 #include <float.h>
 #define NRANSI
 #include "nrutil.h"
-
+#include "utility_macros.h"
 
 void my_svdcmp(double **a, int m, int n, double w[], double **v)
 {
   double my_pythag(double a, double b);
   int flag,i,its,j,jj,k,l=0,nm=0;
-  double anorm,c,f,g,h,s,scale,x,y,z,*rv1;
+  double anorm,c,f,g,h,s,scale,x,y,z;
   double aux;
+  MY_VECTOR(rv1,1,n);
 
   //added to fix pb of convergence with modern pentiums
   double eps = DBL_EPSILON;
 
-  rv1=my_vector(1,n);
   g=scale=anorm=0.0;
   for (i=1;i<=n;i++) {
     l=i+1;
@@ -184,7 +184,6 @@ void my_svdcmp(double **a, int m, int n, double w[], double **v)
       w[k]=x;
     }
   }
-  my_free_vector(rv1,1,n);
 
   // sort the columns of u and v accoring to w coefficients
   for (j=1; j<=n; ++j)
