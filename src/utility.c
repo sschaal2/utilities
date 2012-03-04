@@ -8892,6 +8892,7 @@ find_keyword(FILE *fp, char *name)
   int  i,j,c;
   int  rc = TRUE;
   char string[strlen(name)*2];
+  char string1[strlen(name)*2];
   int  l;
   char sep[]={' ','\n',':',',',';','=','\t','\0'};
 
@@ -8921,7 +8922,8 @@ find_keyword(FILE *fp, char *name)
       }
 
       if (i >= 2*l-1) {
-	strcpy(string,&(string[i-l]));
+	strcpy(string1,&(string[i-l])); // avoid valgrind error
+	strcpy(string,string1);
 	i = strlen(string);
       }
 
