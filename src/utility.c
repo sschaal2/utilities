@@ -4550,6 +4550,80 @@ vec_mat_mult_size(double * a, int ar,  double ** b, int br, int bc, double *c)
 
 /*!*****************************************************************************
  *******************************************************************************
+\note  vec_mat_mult_block
+\date  June 11, 2012
+
+\remarks 
+
+multiplies a vector with a matrix: a * b, assuming indices
+of the vector start at ar_start and the indices of the matrix at 
+br_start and bc_start.
+Note: The program can also cope with passing the same vector as
+factor and result. However, then it is NOT real-time safe.
+
+ *******************************************************************************
+Parameters:  (i/o = input/output)
+
+ \param[in]     a                : vector a
+ \param[in]     ar_start         : start index of rows in a
+ \param[in]     ar_size          : number of rows used for the multiplication in a
+ \param[in]     b                : matrix b
+ \param[in]     br_start         : start index of rows used for the multiplication in b
+ \param[in]     br_size          : number of rows used for the multiplication in b
+ \param[in]     bc_start         : start index of colmns used for the multiplication in b
+ \param[in]     bc_size          : number of columns used for the multiplication in b
+ \param[out]    c                : result of multipliciation
+
+ ******************************************************************************/
+int
+vec_mat_mult_block(double* a, int ar_start, int ar_size,  double** b, int br_start, int br_size, int bc_start, int bc_size, double* c)
+{
+
+  int i, j;
+  Vector temp;
+
+  if (a == c)
+  {
+    /* real-time violation */
+    temp = my_vector(1, bc_size);
+  }
+  else
+  {
+    temp = c;
+  }
+
+  /* printf might cause real-time violation */
+  if ((ar_start < 1) || (br_start < 1) || (bc_start < 1) || (ar_size != br_size)
+      || ((ar_start - 1 + ar_size) > (int)a[0])
+      || ((br_start - 1 + br_size) > (int)b[0][0])
+      || ((bc_start - 1 + bc_size) > (int)b[0][1]))
+  {
+    printf("ERROR: Invalid input! Matrix has size %i x %i, vector has %i entries. Input is ar_start=%i, ar_size=%i, br_start=%i, br_size=%i, bc_start=%i, bc_size=%i.\n",
+        (int)b[0][0], (int)b[0][1], (int)a[0], ar_start, ar_size, br_start, br_size, bc_start, bc_size);
+    return FALSE;
+  }
+
+  for (i = 1; i <= bc_size; ++i)
+  {
+    temp[i] = 0;
+    for (j = 1; j <= ar_size; ++j)
+    {
+      temp[i] += a[ar_start - 1 + j] * b[br_start - 1 + j][bc_start - 1 + i];
+    }
+  }
+
+  if (a == c) {
+    vec_equal(temp, c);
+    /* real-time violation */
+    my_free_vector(temp, 1 , bc_size);
+  }
+
+  return TRUE;
+
+}
+
+/*!*****************************************************************************
+ *******************************************************************************
  \note  mat_add
  \date  August 17, 92
  

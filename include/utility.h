@@ -293,7 +293,8 @@ extern "C" {
   /* multiplies vector with matrix: c=a'*b */
   int      vec_mat_mult(Vector a, Matrix b, Vector c); 
   int      vec_mat_mult_size(double * a, int ar,  double ** b, int br, int bc, double *c);
-
+  int      vec_mat_mult_block(double * a, int ar1, int ar2,  double ** b,
+			      int br1, int br2, int bc1, int bc2, double *c);
 
 
   /* sets the vector to the function of the other one */
