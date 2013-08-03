@@ -172,7 +172,7 @@ extern "C" {
 
   /* finds a keyword in a file and positions the file pointer after it */
   int
-  find_keyword(FILE *fp, char *name);
+  find_keyword(FILE *fp, const char *name);
 
   /* a simple beep */
   int      beep(int how_many);
@@ -212,16 +212,16 @@ extern "C" {
   double   my_gasdev(int *idum);  
 
   /* manages input of a (double) value */
-  int      get_double(char *comment, double defaultvalue, Vector value);  
+  int      get_double(const char *comment, double defaultvalue, Vector value);  
 
   /* manages input of a (float) value */    
-  int      get_float(char *comment, float defaultvalue, float *value);  
+  int      get_float(const char *comment, float defaultvalue, float *value);  
 
   /* manages input of a (int) value */     
-  int      get_int(char *comment, int defaultvalue, int *value);   
+  int      get_int(const char *comment, int defaultvalue, int *value);   
 
   /* manages input of a string value */      
-  int      get_string(char *comment, char *defaultvalue, char *value);
+  int      get_string(const char *comment, const char *defaultvalue, char *value);
 
   /* avoids normal atan probems */
   double   atan2_save(double x, double y);      
@@ -440,19 +440,19 @@ extern "C" {
   void     maxMin(double x, Vector max_x, Vector min_x);
 
   /* simple printing functions for matrices and vectors */
-  void     print_mat(char *comm, Matrix a);
-  void     print_mat_size(char *comm, Matrix a, int nr, int nc);
-  void     print_vec(char *comm, Vector a);
-  void     print_vec_size(char *comm, Vector a, int nr);
-  void     print_ivec(char *comm, iVector a);
-  void     print_imat(char *comm, iMatrix a);
-  void     fprint_mat(FILE *fp, char *comm, Matrix a);
-  void     fprint_imat(FILE *fp, char *comm, iMatrix a);
-  void     fprint_mat_size(FILE *fp, char *comm, Matrix a, int nr, int nc);
-  void     fprint_vec(FILE *fp, char *comm, Vector a);
-  void     fprint_vec_size(FILE *fp, char *comm, Vector a, int nr);
-  void     fprint_ivec(FILE *fp, char *comm, iVector a);
-  void     fprint_ivec_size(FILE *fp, char *comm, iVector a, int nr);
+  void     print_mat(const char *comm, Matrix a);
+  void     print_mat_size(const char *comm, Matrix a, int nr, int nc);
+  void     print_vec(const char *comm, Vector a);
+  void     print_vec_size(const char *comm, Vector a, int nr);
+  void     print_ivec(const char *comm, iVector a);
+  void     print_imat(const char *comm, iMatrix a);
+  void     fprint_mat(FILE *fp, const char *comm, Matrix a);
+  void     fprint_imat(FILE *fp, const char *comm, iMatrix a);
+  void     fprint_mat_size(FILE *fp, const char *comm, Matrix a, int nr, int nc);
+  void     fprint_vec(FILE *fp, const char *comm, Vector a);
+  void     fprint_vec_size(FILE *fp, const char *comm, Vector a, int nr);
+  void     fprint_ivec(FILE *fp, const char *comm, iVector a);
+  void     fprint_ivec_size(FILE *fp, const char *comm, iVector a, int nr);
 
 
   /* binary read and write */

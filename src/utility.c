@@ -107,7 +107,7 @@ sign(double expr)
  
  ******************************************************************************/
 int
-get_double(char *comment, double defaultvalue, double *value)
+get_double(const char *comment, double defaultvalue, double *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -157,7 +157,7 @@ get_double(char *comment, double defaultvalue, double *value)
  
  ******************************************************************************/
 int
-get_float(char *comment, float defaultvalue, float *value)
+get_float(const char *comment, float defaultvalue, float *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -206,7 +206,7 @@ get_float(char *comment, float defaultvalue, float *value)
  
  ******************************************************************************/
 int
-get_int(char *comment, int defaultvalue, int *value)
+get_int(const char *comment, int defaultvalue, int *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -252,7 +252,7 @@ get_int(char *comment, int defaultvalue, int *value)
  
  ******************************************************************************/
 int
-get_string(char *comment, char *defaultvalue, char *value)
+get_string(const char *comment, const char *defaultvalue, char *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -7395,7 +7395,7 @@ fopen_strip_comments(char *filename)
  
  ******************************************************************************/
 void  
-print_mat(char *comm, Matrix a)
+print_mat(const char *comm, Matrix a)
      
 {
 
@@ -7484,7 +7484,7 @@ print_mat(char *comm, Matrix a)
  
  ******************************************************************************/
 void  
-print_imat(char *comm, iMatrix a)
+print_imat(const char *comm, iMatrix a)
      
 {
 
@@ -7574,7 +7574,7 @@ print_imat(char *comm, iMatrix a)
  
  ******************************************************************************/
 void  
-fprint_mat(FILE *fp, char *comm, Matrix a)
+fprint_mat(FILE *fp, const char *comm, Matrix a)
      
 {
 
@@ -7665,7 +7665,7 @@ fprint_mat(FILE *fp, char *comm, Matrix a)
  
  ******************************************************************************/
 void  
-fprint_imat(FILE *fp, char *comm, iMatrix a)
+fprint_imat(FILE *fp, const char *comm, iMatrix a)
      
 {
 
@@ -7758,7 +7758,7 @@ fprint_imat(FILE *fp, char *comm, iMatrix a)
  
  ******************************************************************************/
 void  
-fprint_mat_size(FILE *fp, char *comm, Matrix a, int nr, int nc)
+fprint_mat_size(FILE *fp, const char *comm, Matrix a, int nr, int nc)
      
 {
 
@@ -8342,7 +8342,7 @@ fread_imat(FILE *fp, iMatrix a)
  
  ******************************************************************************/
 void  
-print_mat_size(char *comm, Matrix a, int nr, int nc)
+print_mat_size(const char *comm, Matrix a, int nr, int nc)
      
 {
 
@@ -8378,7 +8378,7 @@ print_mat_size(char *comm, Matrix a, int nr, int nc)
  
  ******************************************************************************/
 void  
-print_vec(char *comm, Vector a)
+print_vec(const char *comm, Vector a)
      
 {
 
@@ -8411,7 +8411,7 @@ print_vec(char *comm, Vector a)
  
  ******************************************************************************/
 void  
-fprint_ivec(FILE *fp, char *comm, iVector a)
+fprint_ivec(FILE *fp, const char *comm, iVector a)
      
 {
 
@@ -8446,7 +8446,7 @@ fprint_ivec(FILE *fp, char *comm, iVector a)
  
  ******************************************************************************/
 void  
-fprint_ivec_size(FILE *fp, char *comm, iVector a, int nr)
+fprint_ivec_size(FILE *fp, const char *comm, iVector a, int nr)
      
 {
 
@@ -8480,7 +8480,7 @@ fprint_ivec_size(FILE *fp, char *comm, iVector a, int nr)
  
  ******************************************************************************/
 void  
-fprint_vec(FILE *fp, char *comm, Vector a)
+fprint_vec(FILE *fp, const char *comm, Vector a)
      
 {
 
@@ -8515,7 +8515,7 @@ fprint_vec(FILE *fp, char *comm, Vector a)
  
  ******************************************************************************/
 void  
-fprint_vec_size(FILE *fp, char *comm, Vector a, int nr)
+fprint_vec_size(FILE *fp, const char *comm, Vector a, int nr)
      
 {
 
@@ -8709,7 +8709,7 @@ fread_ivec(FILE *fp, iVector a)
  
  ******************************************************************************/
 void  
-print_vec_size(char *comm, Vector a, int nr)
+print_vec_size(const char *comm, Vector a, int nr)
      
 {
 
@@ -8741,7 +8741,7 @@ print_vec_size(char *comm, Vector a, int nr)
  
  ******************************************************************************/
 void  
-print_ivec(char *comm, iVector a)
+print_ivec(const char *comm, iVector a)
      
 {
 
@@ -8959,7 +8959,7 @@ my_isnan(double x)
  
  ******************************************************************************/
 int
-find_keyword(FILE *fp, char *name)
+find_keyword(FILE *fp, const char *name)
 
 {
 
