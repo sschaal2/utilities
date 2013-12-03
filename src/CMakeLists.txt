@@ -74,6 +74,6 @@ set(HEADERS
 	../include/utility_macros.h
 	../include/mdefs.h )
 
-add_library(utilities ${SOURCES})
+add_library(utility ${SOURCES})
 install(FILES ${HEADERS} DESTINATION ${LAB_INCLUDES})
-install(TARGETS utilities ARCHIVE DESTINATION ${LAB_LIBDIR})
+install(TARGETS utility ARCHIVE DESTINATION ${LAB_LIBDIR})
