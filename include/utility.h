@@ -212,16 +212,16 @@ extern "C" {
   double   my_gasdev(int *idum);  
 
   /* manages input of a (double) value */
-  int      get_double(char *comment, double defaultvalue, Vector value);  
+  int      get_double(const char *comment, double defaultvalue, Vector value);  
 
   /* manages input of a (float) value */    
-  int      get_float(char *comment, float defaultvalue, float *value);  
+  int      get_float(const char *comment, float defaultvalue, float *value);  
 
   /* manages input of a (int) value */     
-  int      get_int(char *comment, int defaultvalue, int *value);   
+  int      get_int(const char *comment, int defaultvalue, int *value);   
 
   /* manages input of a string value */      
-  int      get_string(char *comment, char *defaultvalue, char *value);
+  int      get_string(const char *comment, char *defaultvalue, char *value);
 
   /* avoids normal atan probems */
   double   atan2_save(double x, double y);      

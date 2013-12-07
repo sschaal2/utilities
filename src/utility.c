@@ -107,7 +107,7 @@ sign(double expr)
  
  ******************************************************************************/
 int
-get_double(char *comment, double defaultvalue, double *value)
+get_double(const char *comment, double defaultvalue, double *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -157,7 +157,7 @@ get_double(char *comment, double defaultvalue, double *value)
  
  ******************************************************************************/
 int
-get_float(char *comment, float defaultvalue, float *value)
+get_float(const char *comment, float defaultvalue, float *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -206,7 +206,7 @@ get_float(char *comment, float defaultvalue, float *value)
  
  ******************************************************************************/
 int
-get_int(char *comment, int defaultvalue, int *value)
+get_int(const char *comment, int defaultvalue, int *value)
 {
   int 				i, c, goon;
   char				string[100];
@@ -252,7 +252,7 @@ get_int(char *comment, int defaultvalue, int *value)
  
  ******************************************************************************/
 int
-get_string(char *comment, char *defaultvalue, char *value)
+get_string(const char *comment, char *defaultvalue, char *value)
 {
   int 				i, c, goon;
   char				string[100];
