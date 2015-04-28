@@ -56,7 +56,7 @@ set(SOURCES
 	${src_directory}/choldc.c 
 	${src_directory}/statistics.c 
 	${src_directory}/data_sets.c
-  ${src_directory}/balanc.c 
+	${src_directory}/balanc.c 
 	${src_directory}/hqr.c 
 	${src_directory}/elmhes.c 
 	${src_directory}/utility.c )
@@ -76,8 +76,6 @@ if(NOT LAB_INCLUDES)
 endif()
 if(NOT LAB_LIBDIR)
   MESSAGE(FATAL_ERROR "LAB_LIBDIR must be defined")
-ELSE()
-  MESSAGE(WARNING "${LAB_LIBDIR} must be defined")
 endif()
 install(FILES ${HEADERS} DESTINATION ${LAB_INCLUDES})
 install(TARGETS utility
