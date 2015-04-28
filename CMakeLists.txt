@@ -69,6 +69,8 @@ set(HEADERS
 
 add_library(utility ${SOURCES})
 target_link_libraries(utility ${LAB_STD_LIBS})
+list(APPEND utility_LIBRARIES utility)
+
 if(NOT LAB_INCLUDES)
   MESSAGE(FATAL_ERROR "LAB_INCLUDES must be defined")
 endif()
@@ -80,4 +82,6 @@ install(TARGETS utility
   ARCHIVE DESTINATION ${LAB_LIBDIR}
   LIBRARY DESTINATION ${LAB_LIBDIR})
 
-set(utility_LIBRARIES utility PARENT_SCOPE)
+# we make the libraries available for the parent scope
+# such that we can use the catkin mechanisms
+set(utility_LIBRARIES ${utility_LIBRARIES} PARENT_SCOPE)
