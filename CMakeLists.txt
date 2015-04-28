@@ -19,8 +19,6 @@ cmake_minimum_required(VERSION 2.8)
 set(utilities_directory ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
 
 # local defines
-#set(header_directory  ${CMAKE_CURRENT_SOURCE_DIR}/include)
-#set(src_directory     ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(header_directory  ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(src_directory     ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -81,6 +79,5 @@ install(FILES ${HEADERS} DESTINATION ${LAB_INCLUDES})
 install(TARGETS utility
   ARCHIVE DESTINATION ${LAB_LIBDIR}
   LIBRARY DESTINATION ${LAB_LIBDIR})
-
 
 set(utility_LIBRARIES utility PARENT_SCOPE)
