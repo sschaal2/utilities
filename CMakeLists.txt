@@ -19,8 +19,6 @@ cmake_minimum_required(VERSION 2.8)
 set(utilities_directory ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
 
 # local defines
-#set(header_directory  ${CMAKE_CURRENT_SOURCE_DIR}/include)
-#set(src_directory     ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(header_directory  ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(src_directory     ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -76,13 +74,10 @@ if(NOT LAB_INCLUDES)
 endif()
 if(NOT LAB_LIBDIR)
   MESSAGE(FATAL_ERROR "LAB_LIBDIR must be defined")
-ELSE()
-  MESSAGE(WARNING "${LAB_LIBDIR} must be defined")
 endif()
 install(FILES ${HEADERS} DESTINATION ${LAB_INCLUDES})
 install(TARGETS utility
   ARCHIVE DESTINATION ${LAB_LIBDIR}
   LIBRARY DESTINATION ${LAB_LIBDIR})
-
 
 set(utility_LIBRARIES utility PARENT_SCOPE)
