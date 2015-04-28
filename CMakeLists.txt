@@ -54,7 +54,7 @@ set(SOURCES
 	${src_directory}/choldc.c 
 	${src_directory}/statistics.c 
 	${src_directory}/data_sets.c
-  ${src_directory}/balanc.c 
+	${src_directory}/balanc.c 
 	${src_directory}/hqr.c 
 	${src_directory}/elmhes.c 
 	${src_directory}/utility.c )
