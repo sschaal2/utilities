@@ -172,7 +172,7 @@ extern "C" {
 
   /* finds a keyword in a file and positions the file pointer after it */
   int
-  find_keyword(FILE *fp, char *name);
+  find_keyword(FILE *fp, const char *name);
 
   /* a simple beep */
   int      beep(int how_many);
