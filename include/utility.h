@@ -95,8 +95,8 @@
 #define PI		3.14159265358979323846264
 #endif
 
-#ifndef G
-#define G		9.81
+#ifndef GRAVITY
+#define GRAVITY		9.81
 #endif
 
 #ifndef E
