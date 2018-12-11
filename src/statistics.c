@@ -1104,7 +1104,7 @@ int
 writeRLS(RLSStatisticsPtr rls)
 {
   FILE *out;
-  char  name[100];
+  char  name[104];
 
   sprintf(name,"%s.rls",rls->name);
   out = fopen(name,"w");
@@ -1262,7 +1262,7 @@ int
 writeHistogram(HistogramStatisticsPtr hist)
 {
   FILE *out;
-  char  name[100];
+  char  name[105];
 
   sprintf(name,"%s.hist",hist->name);
   out = fopen(name,"w");
