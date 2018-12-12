@@ -703,14 +703,14 @@ inverse_dynamics_2DOF(double th1, double th2, double th1d, double th2d,
 
   *control1 = 
     Power(l,2)*m2*th1dd + (Inertia1 + m1*Power(s1,2))*th1dd + 
-      (Inertia2 + m2*Power(s2,2))*(th1dd + th2dd) + G*m1*s1*Cos(th1) + 
+      (Inertia2 + m2*Power(s2,2))*(th1dd + th2dd) + GRAVITY*m1*s1*Cos(th1) + 
 	l*m2*s2*th1dd*Cos(th2) + l*m2*s2*(th1dd + th2dd)*Cos(th2) + 
-	  G*m2*(l*Cos(th1) + s2*Cos(th1 + th2)) -l*m2*s2*th1d*th2d*Sin(th2) - 
+	  GRAVITY*m2*(l*Cos(th1) + s2*Cos(th1 + th2)) -l*m2*s2*th1d*th2d*Sin(th2) - 
 	    l*m2*s2*th2d*(th1d + th2d)*Sin(th2);
 
   *control2 = 
     Inertia2*th1dd + m2*Power(s2,2)*th1dd + Inertia2*th2dd + 
-      m2*Power(s2,2)*th2dd + l*m2*s2*th1dd*Cos(th2) + G*m2*s2*Cos(th1+ th2) + 
+      m2*Power(s2,2)*th2dd + l*m2*s2*th1dd*Cos(th2) + GRAVITY*m2*s2*Cos(th1+ th2) + 
 	l*m2*s2*Power(th1d,2)*Sin(th2);
 
 
@@ -757,10 +757,10 @@ forward_dynamics_2DOF(double th1, double th2, double th1d, double th2d,
 
   th1dd =  
     -((-((-Inertia2 - m2*Power(s2,2) - l*m2*s2*Cos(th2))*
-         (control2 - G*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))
+         (control2 - GRAVITY*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))
          ) + (-Inertia2 - m2*Power(s2,2))*
-       (control1 - G*l*m2*Cos(th1) - G*m1*s1*Cos(th1) - 
-	G*m2*s2*Cos(th2 + th1) + 2*l*m2*s2*th1d*th2d*Sin(th2) + 
+       (control1 - GRAVITY*l*m2*Cos(th1) - GRAVITY*m1*s1*Cos(th1) - 
+	GRAVITY*m2*s2*Cos(th2 + th1) + 2*l*m2*s2*th1d*th2d*Sin(th2) + 
 	l*m2*s2*Power(th2d,2)*Sin(th2)))/
     (Inertia1*Inertia2 + Inertia2*Power(l,2)*m2 + Inertia2*m1*Power(s1,2) + 
      Inertia1*m2*Power(s2,2) + Power(l,2)*Power(m2,2)*Power(s2,2) + 
@@ -768,14 +768,14 @@ forward_dynamics_2DOF(double th1, double th2, double th1d, double th2d,
      Power(l,2)*Power(m2,2)*Power(s2,2)*Power(Cos(th2),2)));
 
   th2dd = 
-    -((control2 - G*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))/
+    -((control2 - GRAVITY*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))/
       (-Inertia2 - m2*Power(s2,2))) + 
 	(-Inertia2 - m2*Power(s2,2) - l*m2*s2*Cos(th2))*
 	  (-((-Inertia2 - m2*Power(s2,2) - l*m2*s2*Cos(th2))*
-	     (control2 - G*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))
+	     (control2 - GRAVITY*m2*s2*Cos(th2 + th1) - l*m2*s2*Power(th1d,2)*Sin(th2))
 	     ) + (-Inertia2 - m2*Power(s2,2))*
-       (control1 - G*l*m2*Cos(th1) - G*m1*s1*Cos(th1) - 
-	G*m2*s2*Cos(th2 + th1) + 2*l*m2*s2*th1d*th2d*Sin(th2) + 
+       (control1 - GRAVITY*l*m2*Cos(th1) - GRAVITY*m1*s1*Cos(th1) - 
+	GRAVITY*m2*s2*Cos(th2 + th1) + 2*l*m2*s2*th1d*th2d*Sin(th2) + 
 	l*m2*s2*Power(th2d,2)*Sin(th2)))/
 	  ((-Inertia2 - m2*Power(s2,2))*
 	   (Inertia1*Inertia2 + Inertia2*Power(l,2)*m2 + Inertia2*m1*Power(s1,2) + 

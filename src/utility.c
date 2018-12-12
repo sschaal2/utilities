@@ -8959,7 +8959,7 @@ my_isnan(double x)
  
  ******************************************************************************/
 int
-find_keyword(FILE *fp, char *name)
+find_keyword(FILE *fp, const char *name)
 
 {
 
