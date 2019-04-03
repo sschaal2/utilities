@@ -174,6 +174,11 @@ extern "C" {
   int
   find_keyword(FILE *fp, const char *name);
 
+  /* finds a keyword in a string and return pointer to first character after keyword */
+  char *
+  find_keyword_in_string(char *string, const char *name);
+
+
   /* a simple beep */
   int      beep(int how_many);
 
