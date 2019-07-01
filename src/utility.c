@@ -9009,6 +9009,97 @@ find_keyword(FILE *fp, const char *name)
 
 }
 
+/*!*****************************************************************************
+ *******************************************************************************
+ \note  find_keyword_in_string
+ \date  October, 1995
+ 
+ \remarks 
+ 
+ find a keyword in the given string and returns the char point to the character
+ right after the keyword. The keyword in the string needs to have standard delimiters 
+ to avoid  that we return a substring of a bigger string
+ 
+ *******************************************************************************
+ Function Parameters: [in]=input,[out]=output
+ 
+ \param[in]     string   : string to be examined
+ \param[in]     name     : keyword to be found
+
+ returns the location of string character right after the keyword, or NULL if
+ not found.
+ 
+ ******************************************************************************/
+char *
+find_keyword_in_string(char *string, const char *name)
+
+{ 
+
+  int  i,j;
+  char *c;
+  int  l;
+  int  lkey;
+  int  lstring;
+  char sep[]={' ','\n',':',',',';','=','\t','\0'};
+  int  start_delim_ok = FALSE;
+  int  end_delim_ok = FALSE;
+
+  // start searching at the begining of the string
+  c  = string;
+  lkey = strlen(name);
+  lstring = strlen(string);
+
+  while ( (c=strstr(c,name)) != NULL) {
+
+    // check for the correct delimiters
+    l = strlen(c);
+    
+    if ( l == lstring) { // keyword at the beginning of string
+      start_delim_ok = TRUE;
+    } else {
+      if (strchr(sep,*(c-1)) != NULL) { // valid delimiter was found
+	start_delim_ok = TRUE;
+      } else { // invalid start delimiter
+	start_delim_ok = FALSE;
+      }
+    }
+
+    if (start_delim_ok) { // check for valid end delimiter
+
+      if (l-lkey == 0) { // key word at the end of string
+
+	end_delim_ok = TRUE;
+	return c+lkey; // this is the \0 character, an empty left-over string
+
+      } else {
+	
+	if (strchr(sep,*(c+lkey)) != NULL) { // valid delimiter was found
+	  end_delim_ok = TRUE;
+	  return c+lkey;
+	} else { // no vlid delimiter was found
+	  end_delim_ok = FALSE;
+	  c = c+lkey;	  
+	}
+
+      }
+	
+    } else {
+      
+      if (l > lkey) { // left over string is long enough to search again
+	c = c+lkey;
+      } else { // left over is too short
+	break;
+      }
+
+    }
+
+  }
+
+  // if we reach this line, nothing was found
+  return NULL;
+
+    
+}
   
 /*!*****************************************************************************
  *******************************************************************************
