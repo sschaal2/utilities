@@ -36,7 +36,7 @@ cc_library(
 	"src/utility.c"
     ],
     includes = ["include"],
-    hdrs = glob(["include/*.h"]),
+    textual_hdrs = glob(["include/*.h"]),
     visibility = ["//visibility:public"],
 
 )
