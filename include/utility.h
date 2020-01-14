@@ -1,6 +1,5 @@
 /* declares important variables and functions in utility.c */
 
-
 #ifndef __utility__
 #define __utility__
 
