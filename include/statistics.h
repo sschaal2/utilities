@@ -14,6 +14,9 @@
 
   ============================================================================*/
 
+#ifndef __statistics__
+#define __statistics__
+
 typedef struct Regression_Statistics {
   int      n_in;
   int      n_out;
@@ -139,4 +142,6 @@ extern "C" {
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

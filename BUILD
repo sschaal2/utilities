@@ -1,5 +1,4 @@
 package(default_visibility = ["//visibility:public"])
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
 cc_library(
     name = "utility",
@@ -37,7 +36,7 @@ cc_library(
 	"src/utility.c"
     ],
     includes = ["include"],
-    hdrs = glob(["include/*.h"]),
+    textual_hdrs = glob(["include/*.h"]),
     visibility = ["//visibility:public"],
 
 )
