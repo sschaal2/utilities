@@ -179,7 +179,7 @@ extern "C" {
 
 
   /* a simple beep */
-  int      beep(int how_many);
+  int      my_beep(int how_many);
 
   /* the sign function */
   double   sign(double);
