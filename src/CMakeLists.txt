@@ -34,7 +34,7 @@ include_directories(BEFORE ../include)
 include_directories(BEFORE ../src)
 
 set(SOURCES 
-	brent.c 
+	brent.c  
 	control.c 
 	dbrent.c  
 	df1dim.c  
@@ -77,3 +77,4 @@ set(HEADERS
 add_library(utility ${SOURCES})
 install(FILES ${HEADERS} DESTINATION ${LAB_INCLUDES})
 install(TARGETS utility ARCHIVE DESTINATION ${LAB_LIBDIR})
+
