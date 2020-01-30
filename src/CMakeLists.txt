@@ -22,6 +22,7 @@ include($ENV{LAB_ROOT}/config/cmake/LAB.cmake)
 
 #############################################################################
 # user defined cmake components
+project(utilities)
 
 # set global compile type
 set(CMAKE_BUILD_TYPE RelWithDebInfo) # Optimization with debugging info
