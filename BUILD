@@ -1,5 +1,12 @@
 package(default_visibility = ["//visibility:public"])
 
+licenses(["notice"])
+
+exports_files(["LICENSE"])
+
+# a library of math an statistics utilities, mostly derived from Numerical Recipes in C, but
+# changed for SL purposes.
+
 cc_library(
     name = "utility",
     srcs = [
@@ -37,4 +44,19 @@ cc_library(
     ],
     includes = ["include"],
     textual_hdrs = glob(["include/*.h"]),
+)
+
+cc_library(
+    name = "src/sort",
+    srcs = ["src/sort.c"],
+)
+
+cc_library(
+    name = "src/random",
+    srcs = ["src/random.c"],
+)
+
+cc_library(
+    name = "src/eigenpackage",
+    srcs = ["src/eigenpackage.c"],
 )
