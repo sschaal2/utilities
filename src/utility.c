@@ -8890,7 +8890,7 @@ interpolate(double **v_in, int n_in, double **v_out, int n_out,
 
 /*!*****************************************************************************
  *******************************************************************************
- \note  beep
+ \note  my_beep
  \date  August 17, 92
  
  \remarks 
@@ -8904,7 +8904,7 @@ interpolate(double **v_in, int n_in, double **v_out, int n_out,
  
  ******************************************************************************/
 int
-beep(int how_many)
+my_beep(int how_many)
      
 {
 

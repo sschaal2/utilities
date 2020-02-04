@@ -1,6 +1,5 @@
 /* declares important variables and functions in utility.c */
 
-
 #ifndef __utility__
 #define __utility__
 
@@ -180,7 +179,7 @@ extern "C" {
 
 
   /* a simple beep */
-  int      beep(int how_many);
+  int      my_beep(int how_many);
 
   /* the sign function */
   double   sign(double);
