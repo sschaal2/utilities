@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  @licstart  The following is the entire license notice for the
  JavaScript code in this file.
@@ -21,6 +22,8 @@
  @licend  The above is the entire license notice
  for the JavaScript code in this file
  */
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 function initMenu(relPath,searchEnabled,serverSide,searchPage,search) {
   function makeTree(data,relPath) {
     var result='';
@@ -40,11 +43,18 @@ function initMenu(relPath,searchEnabled,serverSide,searchPage,search) {
   $('#main-nav').children(':first').addClass('sm sm-dox').attr('id','main-menu');
   if (searchEnabled) {
     if (serverSide) {
+<<<<<<< HEAD
       $('#main-menu').append('<li style="float:right"><div id="MSearchBox" class="MSearchBoxInactive"><div class="left"><form id="FSearchBox" action="'+relPath+searchPage+'" method="get"><img id="MSearchSelect" src="'+relPath+'search/mag.png" alt=""/><input type="text" id="MSearchField" name="query" value="'+search+'" size="20" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)"></form></div><div class="right"></div></div></li>');
+=======
+      $('#main-menu').append('<li style="float:right"><div id="MSearchBox" class="MSearchBoxInactive"><div class="left"><form id="FSearchBox" action="'+searchPage+'" method="get"><img id="MSearchSelect" src="'+relPath+'search/mag.png" alt=""/><input type="text" id="MSearchField" name="query" value="'+search+'" size="20" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)"></form></div><div class="right"></div></div></li>');
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
     } else {
       $('#main-menu').append('<li style="float:right"><div id="MSearchBox" class="MSearchBoxInactive"><span class="left"><img id="MSearchSelect" src="'+relPath+'search/mag_sel.png" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" alt=""/><input type="text" id="MSearchField" value="'+search+'" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)"/></span><span class="right"><a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="'+relPath+'search/close.png" alt=""/></a></span></div></li>');
     }
   }
   $('#main-menu').smartmenus();
 }
+<<<<<<< HEAD
 /* @license-end */
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f

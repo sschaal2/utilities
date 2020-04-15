@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* The standard CSS for doxygen 1.8.16 */
+=======
+/* The standard CSS for doxygen 1.8.13 */
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 
 body, table, div, p, dl {
 	font: 400 14px/22px Roboto,sans-serif;
@@ -53,6 +57,7 @@ dt {
 	font-weight: bold;
 }
 
+<<<<<<< HEAD
 ul.multicol {
 	-moz-column-gap: 1em;
 	-webkit-column-gap: 1em;
@@ -60,6 +65,13 @@ ul.multicol {
 	-moz-column-count: 3;
 	-webkit-column-count: 3;
 	column-count: 3;
+=======
+div.multicol {
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	-moz-column-count: 3;
+	-webkit-column-count: 3;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 }
 
 p.startli, p.startdd {
@@ -82,6 +94,7 @@ p.endtd {
 	margin-bottom: 2px;
 }
 
+<<<<<<< HEAD
 p.interli {
 }
 
@@ -91,6 +104,8 @@ p.interdd {
 p.intertd {
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 /* @end */
 
 caption {
@@ -145,12 +160,20 @@ a.qindex {
 a.qindexHL {
 	font-weight: bold;
 	background-color: #9CAFD4;
+<<<<<<< HEAD
 	color: #FFFFFF;
+=======
+	color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	border: 1px double #869DCA;
 }
 
 .contents a.qindexHL:visited {
+<<<<<<< HEAD
         color: #FFFFFF;
+=======
+        color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 }
 
 a.el {
@@ -174,6 +197,7 @@ dl.el {
 	margin-left: -1cm;
 }
 
+<<<<<<< HEAD
 ul {
   overflow: hidden; /*Fixed: list item bullets overlap floating elements*/
 }
@@ -193,6 +217,8 @@ ul {
   overflow-y: hidden;
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 pre.fragment {
         border: 1px solid #C4CFE5;
         background-color: #FBFCFD;
@@ -207,8 +233,13 @@ pre.fragment {
 }
 
 div.fragment {
+<<<<<<< HEAD
   padding: 0 0 1px 0; /*Fixed: last line underline overlap border*/
   margin: 4px 8px 4px 2px;
+=======
+        padding: 0px;
+        margin: 4px 8px 4px 2px;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	background-color: #FBFCFD;
 	border: 1px solid #C4CFE5;
 }
@@ -278,7 +309,11 @@ span.lineno a:hover {
 div.ah, span.ah {
 	background-color: black;
 	font-weight: bold;
+<<<<<<< HEAD
 	color: #FFFFFF;
+=======
+	color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	margin-bottom: 3px;
 	margin-top: 3px;
 	padding: 0.2em;
@@ -354,7 +389,11 @@ img.formulaDsp {
 	
 }
 
+<<<<<<< HEAD
 img.formulaInl, img.inline {
+=======
+img.formulaInl {
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	vertical-align: middle;
 }
 
@@ -432,6 +471,7 @@ blockquote {
         padding: 0 12px 0 16px;
 }
 
+<<<<<<< HEAD
 blockquote.DocNodeRTL {
    border-left: 0;
    border-right: 2px solid #9CAFD4;
@@ -439,6 +479,8 @@ blockquote.DocNodeRTL {
    padding: 0 16px 0 12px;
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 /* @end */
 
 /*
@@ -703,17 +745,29 @@ dl.reflist dd {
         padding-left: 0px;
 }       
 
+<<<<<<< HEAD
 .params .paramname, .retval .paramname, .tparams .paramname, .exception .paramname {
+=======
+.params .paramname, .retval .paramname {
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
         font-weight: bold;
         vertical-align: top;
 }
         
+<<<<<<< HEAD
 .params .paramtype, .tparams .paramtype {
+=======
+.params .paramtype {
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
         font-style: italic;
         vertical-align: top;
 }       
         
+<<<<<<< HEAD
 .params .paramdir, .tparams .paramdir {
+=======
+.params .paramdir {
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
         font-family: "courier new",courier,monospace;
         vertical-align: top;
 }
@@ -1118,6 +1172,7 @@ div.headertitle
 	padding: 5px 5px 5px 10px;
 }
 
+<<<<<<< HEAD
 .PageDocRTL-title div.headertitle {
   text-align: right;
   direction: rtl;
@@ -1129,10 +1184,21 @@ dl {
 
 /* dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated, dl.todo, dl.test, dl.bug, dl.examples */
 dl.section {
+=======
+dl
+{
+        padding: 0 0 0 10px;
+}
+
+/* dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated, dl.todo, dl.test, dl.bug */
+dl.section
+{
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	margin-left: 0px;
 	padding-left: 0px;
 }
 
+<<<<<<< HEAD
 dl.section.DocNodeRTL {
   margin-right: 0px;
   padding-right: 0px;
@@ -1255,6 +1321,62 @@ dl.bug.DocNodeRTL {
   padding-right: 3px;
   border-right: 4px solid;
   border-color: #C08050;
+=======
+dl.note
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #D0C000;
+}
+
+dl.warning, dl.attention
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #FF0000;
+}
+
+dl.pre, dl.post, dl.invariant
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #00D000;
+}
+
+dl.deprecated
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #505050;
+}
+
+dl.todo
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #00C0E0;
+}
+
+dl.test
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #3030E0;
+}
+
+dl.bug
+{
+        margin-left:-7px;
+        padding-left: 3px;
+        border-left:4px solid;
+        border-color: #C08050;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 }
 
 dl.section dd {
@@ -1371,11 +1493,14 @@ div.toc {
         width: 200px;
 }
 
+<<<<<<< HEAD
 .PageDocRTL-title div.toc {
   float: left !important;
   text-align: right;
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 div.toc li {
         background: url("bdwn.png") no-repeat scroll 0 5px transparent;
         font: 10px/1.2 Verdana,DejaVu Sans,Geneva,sans-serif;
@@ -1384,12 +1509,15 @@ div.toc li {
         padding-top: 2px;
 }
 
+<<<<<<< HEAD
 .PageDocRTL-title div.toc li {
   background-position-x: right !important;
   padding-left: 0 !important;
   padding-right: 10px;
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 div.toc h3 {
         font: bold 12px/1.2 Arial,FreeSans,sans-serif;
 	color: #4665A2;
@@ -1419,6 +1547,7 @@ div.toc li.level4 {
         margin-left: 45px;
 }
 
+<<<<<<< HEAD
 .PageDocRTL-title div.toc li.level1 {
   margin-left: 0 !important;
   margin-right: 0;
@@ -1439,6 +1568,8 @@ div.toc li.level4 {
   margin-right: 45px;
 }
 
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 .inherit_header {
         font-weight: bold;
         color: gray;
@@ -1552,7 +1683,11 @@ tr.heading h2 {
 }
 
 #powerTip.n:after, #powerTip.ne:after, #powerTip.nw:after {
+<<<<<<< HEAD
 	border-top-color: #FFFFFF;
+=======
+	border-top-color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	border-width: 10px;
 	margin: 0px -10px;
 }
@@ -1580,7 +1715,11 @@ tr.heading h2 {
 }
 
 #powerTip.s:after, #powerTip.se:after, #powerTip.sw:after {
+<<<<<<< HEAD
 	border-bottom-color: #FFFFFF;
+=======
+	border-bottom-color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	border-width: 10px;
 	margin: 0px -10px;
 }
@@ -1607,7 +1746,11 @@ tr.heading h2 {
 	left: 100%;
 }
 #powerTip.e:after {
+<<<<<<< HEAD
 	border-left-color: #FFFFFF;
+=======
+	border-left-color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	border-width: 10px;
 	top: 50%;
 	margin-top: -10px;
@@ -1623,7 +1766,11 @@ tr.heading h2 {
 	right: 100%;
 }
 #powerTip.w:after {
+<<<<<<< HEAD
 	border-right-color: #FFFFFF;
+=======
+	border-right-color: #ffffff;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 	border-width: 10px;
 	top: 50%;
 	margin-top: -10px;
@@ -1731,6 +1878,7 @@ th.markdownTableHeadCenter, td.markdownTableBodyCenter {
 	text-align: center
 }
 
+<<<<<<< HEAD
 .DocNodeRTL {
   text-align: right;
   direction: rtl;
@@ -1764,3 +1912,7 @@ u {
 	text-decoration: underline;
 }
 
+=======
+
+/* @end */
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f

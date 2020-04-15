@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this file.
@@ -20,6 +21,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 @licend  The above is the entire license notice
 for the JavaScript code in this file
 */
+=======
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
 {text:"Classes",url:"annotated.html",children:[
@@ -63,7 +66,11 @@ var menudata={children:[
 {text:"File List",url:"files.html"},
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html",children:[
+<<<<<<< HEAD
 {text:"_",url:"globals.html#index__5F"},
+=======
+{text:"_",url:"globals.html#index__"},
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 {text:"a",url:"globals_a.html#index_a"},
 {text:"b",url:"globals_b.html#index_b"},
 {text:"c",url:"globals_c.html#index_c"},
@@ -87,7 +94,11 @@ var menudata={children:[
 {text:"x",url:"globals_x.html#index_x"},
 {text:"z",url:"globals_z.html#index_z"}]},
 {text:"Functions",url:"globals_func.html",children:[
+<<<<<<< HEAD
 {text:"_",url:"globals_func.html#index__5F"},
+=======
+{text:"_",url:"globals_func.html#index__"},
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 {text:"a",url:"globals_func_a.html#index_a"},
 {text:"b",url:"globals_func_b.html#index_b"},
 {text:"c",url:"globals_func_c.html#index_c"},
@@ -106,7 +117,11 @@ var menudata={children:[
 {text:"v",url:"globals_func_v.html#index_v"},
 {text:"w",url:"globals_func_w.html#index_w"}]},
 {text:"Variables",url:"globals_vars.html",children:[
+<<<<<<< HEAD
 {text:"_",url:"globals_vars.html#index__5F"},
+=======
+{text:"_",url:"globals_vars.html#index__"},
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 {text:"d",url:"globals_vars.html#index_d"},
 {text:"e",url:"globals_vars.html#index_e"},
 {text:"f",url:"globals_vars.html#index_f"},

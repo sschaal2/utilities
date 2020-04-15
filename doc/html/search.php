@@ -374,7 +374,11 @@ main();
 
 
 ?>
+<<<<<<< HEAD
 <hr size="1"><address style="text-align: right;"><small>Generated on Tue Oct 19 12:41:51 2010 for UtilitiesLibrary by&nbsp;
+=======
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri May 7 22:42:09 2010 for UtilitiesLibrary by&nbsp;
+>>>>>>> a4658d3fd7eb9aeb467882a117a1bf8b9b01c40f
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
 </body>

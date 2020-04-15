@@ -7229,7 +7229,7 @@ fopen_strip_recursive(char *filename, FILE *temp)
       wait = 2;
     } else if (skip == C_PLUS && rc == '\n') {
       skip = C_NONE;
-      wait = 2;
+      wait = 1;
     }
 
     // check for # signs
