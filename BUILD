@@ -1,4 +1,9 @@
-package(default_visibility = ["//visibility:public"])
+# Every SL directory has a symbolic link to config/bazel to access the config files as local path.
+# While not pretty, this allows BUILD files to be independt of the SL_ROOT workspace path, and only
+# SL.bzl needs to be adjusted
+load(":bazel/SL.bzl", "SL_VISIBILITY")
+
+package(default_visibility = SL_VISIBILITY)
 
 licenses(["notice"])
 
@@ -20,6 +25,7 @@ cc_library(
         "src/dfpmin.c",
         "src/distributions.c",
         "src/dlinmin.c",
+        #       "src/eigenpackage.c",
         "src/elmhes.c",
         "src/f1dim.c",
         "src/frprmn.c",
@@ -36,6 +42,8 @@ cc_library(
         "src/parm_opt.c",
         "src/powell.c",
         "src/pythag.c",
+        #       "src/random.c",
+        #       "src/sort.c",
         "src/stability.c",
         "src/statistics.c",
         "src/svbksb.c",
@@ -44,19 +52,4 @@ cc_library(
     ],
     includes = ["include"],
     textual_hdrs = glob(["include/*.h"]),
-)
-
-cc_library(
-    name = "src/sort",
-    srcs = ["src/sort.c"],
-)
-
-cc_library(
-    name = "src/random",
-    srcs = ["src/random.c"],
-)
-
-cc_library(
-    name = "src/eigenpackage",
-    srcs = ["src/eigenpackage.c"],
 )
